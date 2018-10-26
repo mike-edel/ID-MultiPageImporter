@@ -1,4 +1,4 @@
-﻿// MultiPageImporter2.6.b jsx
+﻿// MultiPageImporter2.6.2 jsx
 // An InDesign CS4 JavaScript
 // 28 MAR 2010
 // Copyright (C) 2008-2009 Scott Zanelli. lonelytreesw@gmail.com
@@ -25,6 +25,7 @@
 // Version 2.5JJB: Added support for ID CS5 PDF importing. The PDFCrop constants used in IDCS5 are now supported (14 FEB 2011). See lines 126-139. //JJB         
 // Version 2.6: Fixed a bug that would display a misleading error message ("This value would cause one or more objects to leave the pasteboard.") - mostly in cases where the default font size for a new text box would cause a 20x20 document units box to overflow
 // Version 2.6.1: Added new document scale for easy page scaling and tag all placed frames
+// Version 2.6.2: Added very basic support for .ai files that are written as pdf compatible files - basically using the pdf code for them - allows for automatically placing multi-artboard AIs
 
 // Get app version and save old interation setting.
 // Some installs have the interaction level set to not show any dialogs.
@@ -97,7 +98,7 @@ else
 var askIt = "Select a PDF or InDesign file to place:";
 if (File.fs =="Windows")
 {
-	var theFile = File.openDialog(askIt, "Placeable: *.indd;*.pdf");
+	var theFile = File.openDialog(askIt, "Placeable: *.indd;*.pdf;*.ai");
 }
 else if (File.fs == "Macintosh")
 {
@@ -115,17 +116,17 @@ if (theFile == null)
 	exit();
 }
 // Check if a file other than PDF or InDesign chosen
-else if((theFile.name.toLowerCase().indexOf(".pdf") == -1 && theFile.name.toLowerCase().indexOf(".ind") == -1))
+else if((theFile.name.toLowerCase().indexOf(".pdf") == -1 && theFile.name.toLowerCase().indexOf(".ind") == -1 && theFile.name.toLowerCase().indexOf(".ai") == -1 ))
 {
 	 restoreDefaults(false);
-	 throwError("A PDF or InDesign file must be chosen. Quitting...", false, 1, null);
+	 throwError("A PDF, PDF compatible AI or InDesign file must be chosen. Quitting...", false, 1, null);
 }
 
 var fileName = File.decode(theFile.name);
 
 // removed 6/25/08: var indUpdateStrings = ["Use Doc's Layer Visibility","Keep Layer Visibility Overrides"];
 
-if(theFile.name.toLowerCase().indexOf(".pdf") != -1)
+if((theFile.name.toLowerCase().indexOf(".pdf") != -1) || (theFile.name.toLowerCase().indexOf(".ai") != -1))
 {
 	// Premedia Systems/JJB Edit Start - 02/14/11 Modified PDFCrop constants to support ID CS3 through CS5 PDFCrop Types.
 	if (appVersion > 6)

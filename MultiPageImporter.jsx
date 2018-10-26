@@ -1470,7 +1470,7 @@ function getINDinfo(theDoc)
 // File filter for the mac to only show indy and pdf files
 function macFileFilter(fileToTest)
 { 
-	if(fileToTest.name.indexOf(".pdf") > -1 || fileToTest.name.indexOf(".ind") > -1)
+	if(fileToTest.name.indexOf(".pdf") > -1 || fileToTest.name.indexOf(".ai") > -1 || fileToTest.name.indexOf(".ind") > -1)
 		return true; 		 
 	else
 		return false;	 
@@ -1611,7 +1611,7 @@ function ondLogClosed()
 // The test for the constructor name came from Dave Suanders: http://jsid.blogspot.com/2006_03_01_archive.html
 function macFileFilter(fileToTest)
 { 
-	if((fileToTest.name.indexOf(".pdf") != -1 || fileToTest.name.indexOf(".indd") != -1  || 
+	if((fileToTest.name.indexOf(".pdf") != -1 || fileToTest.name.indexOf(".indd") != -1 || fileToTest.name.indexOf(".ai") != -1 || 
 	     fileToTest.constructor.name == "Folder" || fileToTest.name == "") && fileToTest.name.indexOf(".app") == -1)
 		return true; 		 
 	else

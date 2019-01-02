@@ -95,7 +95,7 @@ else
 }
 
 // Ask user to select the PDF/InDesign file to place
-var askIt = "Select a PDF or InDesign file to place:";
+var askIt = "Select a PDF, PDF compatible AI or InDesign file to place:";
 if (File.fs =="Windows")
 {
 	var theFile = File.openDialog(askIt, "Placeable: *.indd;*.pdf;*.ai");

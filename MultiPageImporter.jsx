@@ -98,7 +98,7 @@ else
 var askIt = "Select a PDF, PDF compatible AI or InDesign file to place:";
 if (File.fs =="Windows")
 {
-	var theFile = File.openDialog(askIt, "Placeable: *.indd;*.pdf;*.ai");
+	var theFile = File.openDialog(askIt, "Placeable: *.indd;*.idml;*.pdf;*.ai");
 }
 else if (File.fs == "Macintosh")
 {
@@ -116,7 +116,7 @@ if (theFile == null)
 	exit();
 }
 // Check if a file other than PDF or InDesign chosen
-else if((theFile.name.toLowerCase().indexOf(".pdf") == -1 && theFile.name.toLowerCase().indexOf(".ind") == -1 && theFile.name.toLowerCase().indexOf(".ai") == -1 ))
+else if((theFile.name.toLowerCase().indexOf(".pdf") == -1 && theFile.name.toLowerCase().indexOf(".ind") == -1 && theFile.name.toLowerCase().indexOf(".ai") == -1 && theFile.name.toLowerCase().indexOf(".idml") == -1  ))
 {
 	 restoreDefaults(false);
 	 throwError("A PDF, PDF compatible AI or InDesign file must be chosen. Quitting...", false, 1, null);
@@ -1477,7 +1477,7 @@ function getINDinfo(theDoc)
 // File filter for the mac to only show indy and pdf files
 function macFileFilter(fileToTest)
 { 
-	if(fileToTest.name.indexOf(".pdf") > -1 || fileToTest.name.indexOf(".ai") > -1 || fileToTest.name.indexOf(".ind") > -1)
+	if(fileToTest.name.indexOf(".pdf") > -1 || fileToTest.name.indexOf(".ai") > -1 || fileToTest.name.indexOf(".ind") > -1 || fileToTest.name.indexOf(".idml") > -1)
 		return true; 		 
 	else
 		return false;	 
@@ -1618,7 +1618,7 @@ function ondLogClosed()
 // The test for the constructor name came from Dave Suanders: http://jsid.blogspot.com/2006_03_01_archive.html
 function macFileFilter(fileToTest)
 { 
-	if((fileToTest.name.indexOf(".pdf") != -1 || fileToTest.name.indexOf(".indd") != -1 || fileToTest.name.indexOf(".ai") != -1 || 
+	if((fileToTest.name.indexOf(".pdf") != -1 || fileToTest.name.indexOf(".indd") != -1 || fileToTest.name.indexOf(".ai") != -1 || fileToTest.name.indexOf(".idml") != -1 ||
 	     fileToTest.constructor.name == "Folder" || fileToTest.name == "") && fileToTest.name.indexOf(".app") == -1)
 		return true; 		 
 	else

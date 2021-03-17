@@ -452,6 +452,13 @@ switch(positionType)
 		tempAOS.verticalAlignment = VerticalAlignment.BOTTOM_ALIGN;
 		tempAOS.horizontalAlignment = HorizontalAlignment.RIGHT_ALIGN;
 		break;
+	case 13: // Middle relative to Edge
+		tempAOS.spineRelative = true;
+		tempAOS.anchorXoffset *= -1;
+		tempAOS.anchorPoint = AnchorPoint.LEFT_CENTER_ANCHOR;
+		tempAOS.verticalAlignment = VerticalAlignment.CENTER_ALIGN;
+		tempAOS.horizontalAlignment = HorizontalAlignment.LEFT_ALIGN;		
+		break;
 }
 
 // Add the pages to the doc based on normal or mapping pages

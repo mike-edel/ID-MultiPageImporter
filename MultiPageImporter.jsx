@@ -31,7 +31,7 @@
 // Some installs have the interaction level set to not show any dialogs.
 // This is used to insure that the dialog is shown.
 
-#target indesign;
+//#target indesign;
 
 var appVersion = parseInt(app.version);
 // Only works in CS3+

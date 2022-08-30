@@ -1,4 +1,4 @@
-﻿// MultiPageImporter2.6.2 jsx
+// MultiPageImporter2.6.2 jsx
 // An InDesign CS4 JavaScript
 // 28 MAR 2010
 // Copyright (C) 2008-2009 Scott Zanelli. lonelytreesw@gmail.com
@@ -64,6 +64,7 @@ var percX = 100;
 var percY = 100;
 var mapPages = 0;
 var reverseOrder = 0;
+var skipVar = 1;
 var rotate = 0;
 var positionType = 4; // 4 = center
 
@@ -251,6 +252,7 @@ if(dLog.show() == 1)
 	docStartPG = Number(dLog.docStartPG.text);
 	cropType = dLog.cropType.selection.index;
 	offsetX = Number(dLog.offsetX.text);
+	skipVar = Number(dLog.skipVar.text);
 	offsetY = Number(dLog.offsetY.text);
 	percX = Number(dLog.percX.text);
 	percY = Number(dLog.percY.text);
@@ -484,11 +486,11 @@ else if(reverseOrder && noPDFError)
 }
 else
 {
-	addPages(docStartPG, startPG, endPG);
+	addPages(docStartPG, startPG, endPG, skipVar);
 }
 
 // Kill the Object style
-tempObjStyle.remove();
+//tempObjStyle.remove();
 
 // Save prefs and then restore original app/doc settings
 savePrefs(false);
@@ -498,14 +500,14 @@ restoreDefaults(true);
 exit();
 
 // Place the requested pages in the document
-function addPages(docStartPG, startPG, endPG)
+function addPages(docStartPG, startPG, endPG, skipVar)
 {
 	var currentPDFPg = 0;
 	var firstTime = true;
 	var addedAPage = false;
 	var zeroBasedDocPgCnt = docPgCount - 1;
 
-	for(i = docStartPG - 1, currentInputDocPg = startPG; currentInputDocPg <= endPG; currentInputDocPg++, i++)
+	for(i = docStartPG - 1, currentInputDocPg = startPG; currentInputDocPg <= endPG; currentInputDocPg++, i+=skipVar)
 	{
 
 		if(placementINFO.kind == PDF_DOC)
@@ -699,7 +701,9 @@ function makeDialog()
 	dLog.pan1.add('statictext',  [10,94,190,109], "Start Placing on Doc Page:"); 
 	dLog.docStartPG = dLog.pan1.add('edittext', [10,114,70,137], "1");
 	dLog.docStartPG.onChange = docStartPGValidator;
-	
+	dLog.pan1.add('statictext',  [75,112,190,137], "skip every "); 
+	dLog.skipVar = dLog.pan1.add('edittext', [140,114,180,137], "1");
+
 	/***********************/
 	/* Lower Left Panel */
 	/***********************/

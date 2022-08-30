@@ -490,7 +490,7 @@ else
 }
 
 // Kill the Object style
-//tempObjStyle.remove();
+tempObjStyle.remove();
 
 // Save prefs and then restore original app/doc settings
 savePrefs(false);

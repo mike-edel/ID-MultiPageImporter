@@ -757,7 +757,7 @@ function makeDialog()
 	dLog.posDropDown.selection = positionType;
 
 	// Rotation
-	dLog.pan3.add('statictext', [10,70,85,90], "Rotatation:");
+	dLog.pan3.add('statictext', [10,70,85,90], "Rotation:");
 	dLog.rotate = dLog.pan3.add('dropdownlist', [85,67,215,88]);
 	for(i=0;i<rotateValues.length;i++)
 	{
